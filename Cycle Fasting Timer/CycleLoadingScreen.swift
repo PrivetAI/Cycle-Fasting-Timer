@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct NeonLoadingScreen: View {
+struct CycleLoadingScreen: View {
     @State private var pulse = false
     @State private var ringRotation: Double = 0
     
@@ -21,13 +21,13 @@ struct NeonLoadingScreen: View {
                         .frame(width: 80, height: 80)
                         .rotationEffect(.degrees(ringRotation))
                     
-                    NeonClockIcon()
+                    CycleClockIcon()
                         .fill(Color(red: 0, green: 230/255, blue: 118/255))
                         .frame(width: 36, height: 36)
                         .scaleEffect(pulse ? 1.1 : 0.9)
                 }
                 
-                Text("Fasting Tracker Neon")
+                Text("Cycle: Fasting Timer")
                     .font(.title2).fontWeight(.bold)
                     .foregroundColor(.white)
             }
@@ -44,7 +44,7 @@ struct NeonLoadingScreen: View {
     }
 }
 
-struct NeonClockIcon: Shape {
+struct CycleClockIcon: Shape {
     func path(in rect: CGRect) -> Path {
         var p = Path()
         let cx = rect.midX

@@ -13,7 +13,7 @@ struct WeightView: View {
     
     var body: some View {
         ZStack {
-            NeonColors.base.edgesIgnoringSafeArea(.all)
+            CycleColors.base.edgesIgnoringSafeArea(.all)
             
             ScrollView {
                 VStack(spacing: 20) {
@@ -21,7 +21,7 @@ struct WeightView: View {
                     
                     Text("Weight Tracker")
                         .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(NeonColors.textWhite)
+                        .foregroundColor(CycleColors.textWhite)
                     
                     // Log weight card
                     logWeightCard
@@ -51,44 +51,44 @@ struct WeightView: View {
         VStack(spacing: 12) {
             Text("Log Today's Weight")
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(NeonColors.textWhite)
+                .foregroundColor(CycleColors.textWhite)
             
             HStack(spacing: 12) {
                 TextField("", text: $weightInput)
                     .keyboardType(.decimalPad)
                     .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(NeonColors.primary)
+                    .foregroundColor(CycleColors.primary)
                     .multilineTextAlignment(.center)
                     .padding(10)
-                    .background(NeonColors.cardLight)
+                    .background(CycleColors.cardLight)
                     .cornerRadius(10)
                     .frame(width: 120)
                     .placeholder(when: weightInput.isEmpty) {
                         Text("0.0")
                             .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(NeonColors.dimText.opacity(0.4))
+                            .foregroundColor(CycleColors.dimText.opacity(0.4))
                     }
                 
                 Text("kg")
                     .font(.system(size: 16))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
                 
                 Spacer()
                 
                 Button(action: logWeight) {
                     Text(showAdded ? "Saved" : "Log")
                         .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(NeonColors.base)
+                        .foregroundColor(CycleColors.base)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 10)
-                        .background(showAdded ? NeonColors.dimText : NeonColors.primary)
+                        .background(showAdded ? CycleColors.dimText : CycleColors.primary)
                         .cornerRadius(10)
                 }
                 .disabled(showAdded)
             }
         }
         .padding(16)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
         .cornerRadius(14)
     }
     
@@ -97,14 +97,14 @@ struct WeightView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Current Weight")
                     .font(.system(size: 13))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
                 HStack(alignment: .lastTextBaseline, spacing: 4) {
                     Text(String(format: "%.1f", entry.weight))
                         .font(.system(size: 36, weight: .bold))
-                        .foregroundColor(NeonColors.primary)
+                        .foregroundColor(CycleColors.primary)
                     Text("kg")
                         .font(.system(size: 15))
-                        .foregroundColor(NeonColors.dimText)
+                        .foregroundColor(CycleColors.dimText)
                 }
             }
             Spacer()
@@ -116,7 +116,7 @@ struct WeightView: View {
                 VStack(spacing: 2) {
                     if diff < 0 {
                         ArrowUpShape()
-                            .stroke(NeonColors.primary, lineWidth: 2)
+                            .stroke(CycleColors.primary, lineWidth: 2)
                             .frame(width: 16, height: 16)
                             .rotationEffect(.degrees(180))
                     } else if diff > 0 {
@@ -126,12 +126,12 @@ struct WeightView: View {
                     }
                     Text(String(format: "%+.1f", diff))
                         .font(.system(size: 13, weight: .medium))
-                        .foregroundColor(diff < 0 ? NeonColors.primary : (diff > 0 ? Color(red: 1, green: 0.4, blue: 0.4) : NeonColors.dimText))
+                        .foregroundColor(diff < 0 ? CycleColors.primary : (diff > 0 ? Color(red: 1, green: 0.4, blue: 0.4) : CycleColors.dimText))
                 }
             }
         }
         .padding(16)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
         .cornerRadius(14)
     }
     
@@ -141,21 +141,21 @@ struct WeightView: View {
         return VStack(alignment: .leading, spacing: 12) {
             Text("Weight Trend - 30 Days")
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(NeonColors.textWhite)
+                .foregroundColor(CycleColors.textWhite)
             
             if weightData.count >= 2 {
-                NeonWeightChart(data: weightData)
+                CycleWeightChart(data: weightData)
                     .frame(height: 160)
             } else {
                 Text("Log at least 2 days to see the trend")
                     .font(.system(size: 13))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
                     .frame(height: 80)
                     .frame(maxWidth: .infinity)
             }
         }
         .padding(16)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
         .cornerRadius(14)
     }
     
@@ -166,36 +166,36 @@ struct WeightView: View {
         return VStack(alignment: .leading, spacing: 12) {
             Text("Fasting vs Weight")
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(NeonColors.textWhite)
+                .foregroundColor(CycleColors.textWhite)
             
             if weightData.count >= 2 && !fastData.isEmpty {
-                NeonDualChart(fastData: fastData, weightData: weightData)
+                CycleDualChart(fastData: fastData, weightData: weightData)
                     .frame(height: 140)
                 
                 HStack(spacing: 16) {
                     HStack(spacing: 6) {
-                        Circle().fill(NeonColors.primary).frame(width: 8, height: 8)
+                        Circle().fill(CycleColors.primary).frame(width: 8, height: 8)
                         Text("Fasting hours")
                             .font(.system(size: 11))
-                            .foregroundColor(NeonColors.dimText)
+                            .foregroundColor(CycleColors.dimText)
                     }
                     HStack(spacing: 6) {
                         Circle().fill(Color(red: 0.4, green: 0.6, blue: 1.0)).frame(width: 8, height: 8)
                         Text("Weight")
                             .font(.system(size: 11))
-                            .foregroundColor(NeonColors.dimText)
+                            .foregroundColor(CycleColors.dimText)
                     }
                 }
             } else {
                 Text("Log weight and fasts to see correlation")
                     .font(.system(size: 13))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
                     .frame(height: 60)
                     .frame(maxWidth: .infinity)
             }
         }
         .padding(16)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
         .cornerRadius(14)
     }
     
@@ -205,29 +205,29 @@ struct WeightView: View {
         return VStack(alignment: .leading, spacing: 10) {
             Text("Recent Entries")
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(NeonColors.textWhite)
+                .foregroundColor(CycleColors.textWhite)
             
             if recent.isEmpty {
                 Text("No weight entries yet")
                     .font(.system(size: 13))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
             } else {
                 ForEach(recent) { entry in
                     HStack {
                         Text(timeFmt.string(from: entry.date))
                             .font(.system(size: 14))
-                            .foregroundColor(NeonColors.dimText)
+                            .foregroundColor(CycleColors.dimText)
                         Spacer()
                         Text(String(format: "%.1f kg", entry.weight))
                             .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(NeonColors.textWhite)
+                            .foregroundColor(CycleColors.textWhite)
                     }
                     .padding(.vertical, 4)
                 }
             }
         }
         .padding(16)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
         .cornerRadius(14)
     }
     
@@ -255,7 +255,7 @@ struct ArrowUpShape: Shape {
     }
 }
 
-struct NeonWeightChart: View {
+struct CycleWeightChart: View {
     let data: [(Date, Double)]
     
     var body: some View {
@@ -275,7 +275,7 @@ struct NeonWeightChart: View {
                         p.move(to: CGPoint(x: 0, y: y))
                         p.addLine(to: CGPoint(x: w, y: y))
                     }
-                    .stroke(NeonColors.cardLight, lineWidth: 0.5)
+                    .stroke(CycleColors.cardLight, lineWidth: 0.5)
                 }
                 
                 Path { p in
@@ -302,7 +302,7 @@ struct NeonWeightChart: View {
     }
 }
 
-struct NeonDualChart: View {
+struct CycleDualChart: View {
     let fastData: [(Date, Double)]
     let weightData: [(Date, Double)]
     
@@ -330,7 +330,7 @@ struct NeonDualChart: View {
                         else { p.addLine(to: CGPoint(x: x, y: y)) }
                     }
                 }
-                .stroke(NeonColors.primary.opacity(0.7), lineWidth: 1.5)
+                .stroke(CycleColors.primary.opacity(0.7), lineWidth: 1.5)
                 
                 // Weight line
                 Path { p in

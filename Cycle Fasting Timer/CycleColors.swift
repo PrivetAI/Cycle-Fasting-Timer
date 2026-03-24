@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct NeonColors {
+struct CycleColors {
     static let base = Color(red: 10/255, green: 10/255, blue: 10/255)
     static let primary = Color(red: 0, green: 230/255, blue: 118/255)
     static let textWhite = Color.white

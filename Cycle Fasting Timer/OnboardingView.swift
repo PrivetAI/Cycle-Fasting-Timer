@@ -10,7 +10,7 @@ struct OnboardingView: View {
     
     var body: some View {
         ZStack {
-            NeonColors.base.edgesIgnoringSafeArea(.all)
+            CycleColors.base.edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
                 Spacer().frame(height: 60)
@@ -18,12 +18,12 @@ struct OnboardingView: View {
                 // Title
                 Text("Choose Your Plan")
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(NeonColors.textWhite)
+                    .foregroundColor(CycleColors.textWhite)
                     .padding(.bottom, 8)
                 
                 Text("Select a fasting schedule to get started")
                     .font(.system(size: 15))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
                     .padding(.bottom, 32)
                 
                 // Plan cards
@@ -45,10 +45,10 @@ struct OnboardingView: View {
                 Button(action: confirmSelection) {
                     Text("Continue")
                         .font(.system(size: 17, weight: .bold))
-                        .foregroundColor(NeonColors.base)
+                        .foregroundColor(CycleColors.base)
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
-                        .background(NeonColors.primary)
+                        .background(CycleColors.primary)
                         .cornerRadius(14)
                 }
                 .padding(.horizontal, 24)
@@ -67,31 +67,31 @@ struct OnboardingView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(plan.name)
                         .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(NeonColors.textWhite)
+                        .foregroundColor(CycleColors.textWhite)
                     Text("\(plan.fastingHours)h fasting / \(plan.eatingHours)h eating")
                         .font(.system(size: 13))
-                        .foregroundColor(NeonColors.dimText)
+                        .foregroundColor(CycleColors.dimText)
                 }
                 Spacer()
                 Circle()
-                    .fill(isSelected ? NeonColors.primary : NeonColors.cardLight)
+                    .fill(isSelected ? CycleColors.primary : CycleColors.cardLight)
                     .frame(width: 24, height: 24)
                     .overlay(
                         Group {
                             if isSelected {
                                 CheckmarkShape()
-                                    .stroke(NeonColors.base, lineWidth: 2)
+                                    .stroke(CycleColors.base, lineWidth: 2)
                                     .frame(width: 14, height: 14)
                             }
                         }
                     )
             }
             .padding(16)
-            .background(isSelected ? NeonColors.card.opacity(0.9) : NeonColors.card.opacity(0.5))
+            .background(isSelected ? CycleColors.card.opacity(0.9) : CycleColors.card.opacity(0.5))
             .cornerRadius(12)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(isSelected ? NeonColors.primary : Color.clear, lineWidth: 1.5)
+                    .stroke(isSelected ? CycleColors.primary : Color.clear, lineWidth: 1.5)
             )
         }
     }
@@ -102,49 +102,49 @@ struct OnboardingView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Custom")
                         .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(NeonColors.textWhite)
+                        .foregroundColor(CycleColors.textWhite)
                     
                     if showCustom {
                         HStack(spacing: 8) {
                             Text("Fasting hours:")
                                 .font(.system(size: 13))
-                                .foregroundColor(NeonColors.dimText)
+                                .foregroundColor(CycleColors.dimText)
                             TextField("", text: $customHours)
                                 .keyboardType(.numberPad)
                                 .font(.system(size: 15, weight: .bold))
-                                .foregroundColor(NeonColors.primary)
+                                .foregroundColor(CycleColors.primary)
                                 .frame(width: 40)
                                 .multilineTextAlignment(.center)
                                 .padding(4)
-                                .background(NeonColors.cardLight)
+                                .background(CycleColors.cardLight)
                                 .cornerRadius(6)
                         }
                     } else {
                         Text("Set your own schedule")
                             .font(.system(size: 13))
-                            .foregroundColor(NeonColors.dimText)
+                            .foregroundColor(CycleColors.dimText)
                     }
                 }
                 Spacer()
                 Circle()
-                    .fill(showCustom ? NeonColors.primary : NeonColors.cardLight)
+                    .fill(showCustom ? CycleColors.primary : CycleColors.cardLight)
                     .frame(width: 24, height: 24)
                     .overlay(
                         Group {
                             if showCustom {
                                 CheckmarkShape()
-                                    .stroke(NeonColors.base, lineWidth: 2)
+                                    .stroke(CycleColors.base, lineWidth: 2)
                                     .frame(width: 14, height: 14)
                             }
                         }
                     )
             }
             .padding(16)
-            .background(showCustom ? NeonColors.card.opacity(0.9) : NeonColors.card.opacity(0.5))
+            .background(showCustom ? CycleColors.card.opacity(0.9) : CycleColors.card.opacity(0.5))
             .cornerRadius(12)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(showCustom ? NeonColors.primary : Color.clear, lineWidth: 1.5)
+                    .stroke(showCustom ? CycleColors.primary : Color.clear, lineWidth: 1.5)
             )
         }
     }

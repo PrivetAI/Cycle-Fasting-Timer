@@ -6,7 +6,7 @@ struct StatsView: View {
     
     var body: some View {
         ZStack {
-            NeonColors.base.edgesIgnoringSafeArea(.all)
+            CycleColors.base.edgesIgnoringSafeArea(.all)
             
             ScrollView {
                 VStack(spacing: 16) {
@@ -14,7 +14,7 @@ struct StatsView: View {
                     
                     Text("Statistics")
                         .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(NeonColors.textWhite)
+                        .foregroundColor(CycleColors.textWhite)
                     
                     // FREE: Basic stats
                     basicStatsSection
@@ -28,16 +28,11 @@ struct StatsView: View {
                     // FREE: 30-day chart
                     chartCard
                     
-                    // PREMIUM: Advanced analytics
-                    if store.isPro {
-                        advancedAnalyticsSection
-                        
-                        // Export button
-                        exportButton
-                        
-                    } else {
-                        premiumUpsell
-                    }
+                    // Advanced analytics
+                    advancedAnalyticsSection
+                    
+                    // Export button
+                    exportButton
                     
                     Spacer().frame(height: 40)
                 }
@@ -67,7 +62,7 @@ struct StatsView: View {
         VStack(spacing: 10) {
             Text("Insights")
                 .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(NeonColors.textWhite)
+                .foregroundColor(CycleColors.textWhite)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             insightCard(
@@ -83,22 +78,22 @@ struct StatsView: View {
             )
         }
         .padding(16)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
         .cornerRadius(14)
     }
     
     private func insightCard(text: String) -> some View {
         HStack(spacing: 10) {
             StarShape()
-                .fill(NeonColors.primary.opacity(0.6))
+                .fill(CycleColors.primary.opacity(0.6))
                 .frame(width: 14, height: 14)
             Text(text)
                 .font(.system(size: 14))
-                .foregroundColor(NeonColors.textWhite)
+                .foregroundColor(CycleColors.textWhite)
             Spacer()
         }
         .padding(10)
-        .background(NeonColors.cardLight)
+        .background(CycleColors.cardLight)
         .cornerRadius(10)
     }
     
@@ -109,29 +104,29 @@ struct StatsView: View {
             VStack(spacing: 6) {
                 Text("\(store.daysFastedThisMonth)")
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(NeonColors.primary)
+                    .foregroundColor(CycleColors.primary)
                 Text("Days fasted\nthis month")
                     .font(.system(size: 11))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
                     .multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)
             .padding(16)
-            .background(NeonColors.card)
+            .background(CycleColors.card)
             .cornerRadius(14)
             
             VStack(spacing: 6) {
                 Text(String(format: "%.1fh", store.longestFastHours))
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(NeonColors.primary)
+                    .foregroundColor(CycleColors.primary)
                 Text("Longest fast\never")
                     .font(.system(size: 11))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
                     .multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)
             .padding(16)
-            .background(NeonColors.card)
+            .background(CycleColors.card)
             .cornerRadius(14)
         }
     }
@@ -142,13 +137,13 @@ struct StatsView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Last 30 Days")
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(NeonColors.textWhite)
+                .foregroundColor(CycleColors.textWhite)
             
-            NeonLineChart(data: store.last30DaysDurations())
+            CycleLineChart(data: store.last30DaysDurations())
                 .frame(height: 150)
         }
         .padding(16)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
         .cornerRadius(14)
     }
     
@@ -159,15 +154,8 @@ struct StatsView: View {
             HStack {
                 Text("Advanced Analytics")
                     .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(NeonColors.textWhite)
+                    .foregroundColor(CycleColors.textWhite)
                 Spacer()
-                Text("PRO")
-                    .font(.system(size: 10, weight: .bold))
-                    .foregroundColor(NeonColors.base)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
-                    .background(NeonColors.primary)
-                    .cornerRadius(6)
             }
             
             // Period selector
@@ -176,37 +164,37 @@ struct StatsView: View {
                     Button(action: { selectedPeriod = period }) {
                         Text(period.rawValue)
                             .font(.system(size: 13, weight: .medium))
-                            .foregroundColor(selectedPeriod == period ? NeonColors.base : NeonColors.dimText)
+                            .foregroundColor(selectedPeriod == period ? CycleColors.base : CycleColors.dimText)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
-                            .background(selectedPeriod == period ? NeonColors.primary : Color.clear)
+                            .background(selectedPeriod == period ? CycleColors.primary : Color.clear)
                             .cornerRadius(8)
                     }
                 }
             }
             .padding(4)
-            .background(NeonColors.cardLight)
+            .background(CycleColors.cardLight)
             .cornerRadius(10)
             
             // Total hours for period
             VStack(alignment: .leading, spacing: 8) {
                 Text("Total Fasting Hours")
                     .font(.system(size: 14))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
                 Text(String(format: "%.1f hours", store.totalFastingHours(period: selectedPeriod)))
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(NeonColors.primary)
+                    .foregroundColor(CycleColors.primary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(12)
-            .background(NeonColors.cardLight)
+            .background(CycleColors.cardLight)
             .cornerRadius(10)
             
             // Detailed breakdown
             VStack(alignment: .leading, spacing: 8) {
                 Text("Breakdown")
                     .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
                 
                 detailRow("Fasts completed", "\(store.history.filter { $0.endDate != nil }.count)")
                 detailRow("Avg eating window", String(format: "%.1fh", store.averageEatingWindowHours))
@@ -214,31 +202,31 @@ struct StatsView: View {
                 detailRow("Best plan", store.mostCommonPlanName)
             }
             .padding(12)
-            .background(NeonColors.cardLight)
+            .background(CycleColors.cardLight)
             .cornerRadius(10)
             
             // Correlation card
             VStack(alignment: .leading, spacing: 8) {
                 Text("Correlations")
                     .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(NeonColors.dimText)
+                    .foregroundColor(CycleColors.dimText)
                 
                 Text(store.fastsBetterOnWeekdays ? "Weekday fasts average longer than weekends" : "Weekend fasts average longer than weekdays")
                     .font(.system(size: 13))
-                    .foregroundColor(NeonColors.textWhite)
+                    .foregroundColor(CycleColors.textWhite)
                 
                 if !store.weightEntries.isEmpty {
                     Text("Weight data: \(store.weightEntries.count) entries logged")
                         .font(.system(size: 13))
-                        .foregroundColor(NeonColors.textWhite)
+                        .foregroundColor(CycleColors.textWhite)
                 }
             }
             .padding(12)
-            .background(NeonColors.cardLight)
+            .background(CycleColors.cardLight)
             .cornerRadius(10)
         }
         .padding(16)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
         .cornerRadius(14)
     }
     
@@ -254,11 +242,11 @@ struct StatsView: View {
         HStack {
             Text(label)
                 .font(.system(size: 13))
-                .foregroundColor(NeonColors.dimText)
+                .foregroundColor(CycleColors.dimText)
             Spacer()
             Text(value)
                 .font(.system(size: 13, weight: .semibold))
-                .foregroundColor(NeonColors.textWhite)
+                .foregroundColor(CycleColors.textWhite)
         }
     }
     
@@ -266,65 +254,16 @@ struct StatsView: View {
         Button(action: {}) {
             HStack(spacing: 8) {
                 ExportIconShape()
-                    .stroke(NeonColors.base, lineWidth: 2)
+                    .stroke(CycleColors.base, lineWidth: 2)
                     .frame(width: 18, height: 18)
                 Text("Export Data")
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(NeonColors.base)
+                    .foregroundColor(CycleColors.base)
             }
             .frame(maxWidth: .infinity)
             .frame(height: 46)
-            .background(NeonColors.primary)
+            .background(CycleColors.primary)
             .cornerRadius(12)
-        }
-    }
-    
-    // MARK: - Premium Upsell
-    
-    private var premiumUpsell: some View {
-        VStack(spacing: 16) {
-            HStack {
-                LockIconShape()
-                    .fill(NeonColors.dimText)
-                    .frame(width: 24, height: 24)
-                Text("Premium Features")
-                    .font(.system(size: 17, weight: .bold))
-                    .foregroundColor(NeonColors.textWhite)
-            }
-            
-            VStack(alignment: .leading, spacing: 8) {
-                featureRow("Advanced analytics and breakdowns")
-                featureRow("Export all data to text file")
-                featureRow("2 additional UI themes")
-            }
-            
-            Button(action: { store.isPro = true }) {
-                Text("Unlock Premium - $2.99")
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(NeonColors.base)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 48)
-                    .background(NeonColors.primary)
-                    .cornerRadius(12)
-            }
-            
-            Text("One-time purchase")
-                .font(.system(size: 11))
-                .foregroundColor(NeonColors.dimText)
-        }
-        .padding(16)
-        .background(NeonColors.card)
-        .cornerRadius(14)
-    }
-    
-    private func featureRow(_ text: String) -> some View {
-        HStack(spacing: 10) {
-            CheckmarkShape()
-                .stroke(NeonColors.primary, lineWidth: 2)
-                .frame(width: 14, height: 14)
-            Text(text)
-                .font(.system(size: 14))
-                .foregroundColor(NeonColors.textWhite)
         }
     }
     
@@ -332,19 +271,19 @@ struct StatsView: View {
         VStack(spacing: 6) {
             Text(value)
                 .font(.system(size: 20, weight: .bold))
-                .foregroundColor(NeonColors.primary)
+                .foregroundColor(CycleColors.primary)
             Text(label)
                 .font(.system(size: 12))
-                .foregroundColor(NeonColors.dimText)
+                .foregroundColor(CycleColors.dimText)
         }
         .frame(maxWidth: .infinity)
         .padding(16)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
         .cornerRadius(14)
     }
 }
 
-struct NeonLineChart: View {
+struct CycleLineChart: View {
     let data: [(Date, Double)]
     
     var body: some View {
@@ -361,7 +300,7 @@ struct NeonLineChart: View {
                         p.move(to: CGPoint(x: 0, y: y))
                         p.addLine(to: CGPoint(x: w, y: y))
                     }
-                    .stroke(NeonColors.cardLight, lineWidth: 0.5)
+                    .stroke(CycleColors.cardLight, lineWidth: 0.5)
                 }
                 
                 Path { p in
@@ -372,12 +311,12 @@ struct NeonLineChart: View {
                         else { p.addLine(to: CGPoint(x: x, y: y)) }
                     }
                 }
-                .stroke(NeonColors.primary, lineWidth: 2)
+                .stroke(CycleColors.primary, lineWidth: 2)
                 
                 ForEach(Array(data.enumerated()), id: \.offset) { i, item in
                     if item.1 > 0 {
                         Circle()
-                            .fill(NeonColors.primary)
+                            .fill(CycleColors.primary)
                             .frame(width: 4, height: 4)
                             .position(
                                 x: CGFloat(i) * stepX,

@@ -6,7 +6,7 @@ struct MainTabView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            NeonColors.base.edgesIgnoringSafeArea(.all)
+            CycleColors.base.edgesIgnoringSafeArea(.all)
             
             Group {
                 switch selectedTab {
@@ -30,33 +30,33 @@ struct MainTabView: View {
         HStack(spacing: 0) {
             tabButton(index: 0, label: "Timer", icon: AnyView(
                 TimerIconShape()
-                    .fill(selectedTab == 0 ? NeonColors.primary : NeonColors.dimText)
+                    .fill(selectedTab == 0 ? CycleColors.primary : CycleColors.dimText)
                     .frame(width: 22, height: 22)
             ))
             tabButton(index: 1, label: "History", icon: AnyView(
                 HistoryIconShape()
-                    .fill(selectedTab == 1 ? NeonColors.primary : NeonColors.dimText)
+                    .fill(selectedTab == 1 ? CycleColors.primary : CycleColors.dimText)
                     .frame(width: 22, height: 22)
             ))
             tabButton(index: 2, label: "Weight", icon: AnyView(
                 ScaleIconShape()
-                    .fill(selectedTab == 2 ? NeonColors.primary : NeonColors.dimText)
+                    .fill(selectedTab == 2 ? CycleColors.primary : CycleColors.dimText)
                     .frame(width: 22, height: 22)
             ))
             tabButton(index: 3, label: "Stats", icon: AnyView(
                 ChartIconShape()
-                    .fill(selectedTab == 3 ? NeonColors.primary : NeonColors.dimText)
+                    .fill(selectedTab == 3 ? CycleColors.primary : CycleColors.dimText)
                     .frame(width: 22, height: 22)
             ))
             tabButton(index: 4, label: "Settings", icon: AnyView(
                 GearIconShape()
-                    .fill(selectedTab == 4 ? NeonColors.primary : NeonColors.dimText)
+                    .fill(selectedTab == 4 ? CycleColors.primary : CycleColors.dimText)
                     .frame(width: 22, height: 22)
             ))
         }
         .padding(.top, 10)
         .padding(.bottom, 24)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
     }
     
     private func tabButton(index: Int, label: String, icon: AnyView) -> some View {
@@ -65,7 +65,7 @@ struct MainTabView: View {
                 icon
                 Text(label)
                     .font(.system(size: 9, weight: .medium))
-                    .foregroundColor(selectedTab == index ? NeonColors.primary : NeonColors.dimText)
+                    .foregroundColor(selectedTab == index ? CycleColors.primary : CycleColors.dimText)
             }
             .frame(maxWidth: .infinity)
         }

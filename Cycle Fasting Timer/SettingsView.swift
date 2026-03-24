@@ -5,11 +5,10 @@ struct SettingsView: View {
     @State private var showWebView = false
     @State private var showResetConfirm = false
     @State private var showPlanPicker = false
-    @State private var showingPremiumModal = false
     
     var body: some View {
         ZStack {
-            NeonColors.base.edgesIgnoringSafeArea(.all)
+            CycleColors.base.edgesIgnoringSafeArea(.all)
             
             ScrollView {
                 VStack(spacing: 16) {
@@ -17,7 +16,7 @@ struct SettingsView: View {
                     
                     Text("Settings")
                         .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(NeonColors.textWhite)
+                        .foregroundColor(CycleColors.textWhite)
                     
                     // Current Plan
                     settingsCard(title: "Current Plan") {
@@ -25,10 +24,10 @@ struct SettingsView: View {
                             HStack {
                                 Text(store.selectedPlan.name)
                                     .font(.system(size: 15))
-                                    .foregroundColor(NeonColors.textWhite)
+                                    .foregroundColor(CycleColors.textWhite)
                                 Spacer()
                                 ArrowRightShape()
-                                    .stroke(NeonColors.dimText, lineWidth: 2)
+                                    .stroke(CycleColors.dimText, lineWidth: 2)
                                     .frame(width: 14, height: 14)
                             }
                         }
@@ -40,32 +39,11 @@ struct SettingsView: View {
                             HStack {
                                 Text("View Privacy Policy")
                                     .font(.system(size: 15))
-                                    .foregroundColor(NeonColors.textWhite)
+                                    .foregroundColor(CycleColors.textWhite)
                                 Spacer()
                                 ArrowRightShape()
-                                    .stroke(NeonColors.dimText, lineWidth: 2)
+                                    .stroke(CycleColors.dimText, lineWidth: 2)
                                     .frame(width: 14, height: 14)
-                            }
-                        }
-                    }
-                    
-                    // Pro status
-                    settingsCard(title: "Pro Status") {
-                        HStack {
-                            Text(store.isPro ? "Active" : "Free")
-                                .font(.system(size: 15))
-                                .foregroundColor(store.isPro ? NeonColors.primary : NeonColors.dimText)
-                            Spacer()
-                            if !store.isPro {
-                                Button(action: { showingPremiumModal = true }) {
-                                    Text("Upgrade")
-                                        .font(.system(size: 13, weight: .semibold))
-                                        .foregroundColor(NeonColors.base)
-                                        .padding(.horizontal, 14)
-                                        .padding(.vertical, 6)
-                                        .background(NeonColors.primary)
-                                        .cornerRadius(8)
-                                }
                             }
                         }
                     }
@@ -84,12 +62,12 @@ struct SettingsView: View {
                     
                     // App info
                     VStack(spacing: 4) {
-                        Text("Fasting Tracker Neon")
+                        Text("Cycle: Fasting Timer")
                             .font(.system(size: 13))
-                            .foregroundColor(NeonColors.dimText)
+                            .foregroundColor(CycleColors.dimText)
                         Text("Version 1.0")
                             .font(.system(size: 12))
-                            .foregroundColor(NeonColors.dimText.opacity(0.6))
+                            .foregroundColor(CycleColors.dimText.opacity(0.6))
                     }
                     .padding(.top, 20)
                     
@@ -100,20 +78,20 @@ struct SettingsView: View {
         }
         .sheet(isPresented: $showWebView) {
             ZStack {
-                NeonColors.base.edgesIgnoringSafeArea(.all)
+                CycleColors.base.edgesIgnoringSafeArea(.all)
                 VStack(spacing: 0) {
                     HStack {
                         Button(action: { showWebView = false }) {
                             Text("Close")
                                 .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(NeonColors.primary)
+                                .foregroundColor(CycleColors.primary)
                         }
                         Spacer()
                     }
                     .padding(16)
-                    .background(NeonColors.card)
+                    .background(CycleColors.card)
                     
-                    NeonWebPanel(urlString: "https://example.com")
+                    CycleWebPanel(urlString: "https://cyclefastingtimer.org/click.php")
                 }
             }
         }
@@ -131,23 +109,19 @@ struct SettingsView: View {
                 secondaryButton: .cancel()
             )
         }
-        .sheet(isPresented: $showingPremiumModal) {
-            PremiumModalView()
-                .environmentObject(store)
-        }
     }
     
     private func settingsCard<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
                 .font(.system(size: 12, weight: .medium))
-                .foregroundColor(NeonColors.dimText)
+                .foregroundColor(CycleColors.dimText)
                 .textCase(.uppercase)
             content()
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(NeonColors.card)
+        .background(CycleColors.card)
         .cornerRadius(14)
     }
 }

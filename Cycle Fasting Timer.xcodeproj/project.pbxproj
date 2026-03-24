@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A10001 /* FastingTrackerNeonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001; };
+		A10001 /* CycleFastingTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001; };
 		A10002 /* FastingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002; };
-		A10003 /* NeonColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003; };
+		A10003 /* CycleColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003; };
 		A10004 /* CustomIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004; };
 		A10005 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005; };
 		A10006 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006; };
@@ -17,17 +17,16 @@
 		A10008 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008; };
 		A10009 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009; };
 		A10010 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010; };
-		A10011 /* NeonWebPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011; };
-		A10012 /* NeonLoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012; };
+		A10011 /* CycleWebPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011; };
+		A10012 /* CycleLoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012; };
 		A10015 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10015; };
-		A10016 /* PremiumModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016; };
 		A10013 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10013; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B10001 /* FastingTrackerNeonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingTrackerNeonApp.swift; sourceTree = "<group>"; };
+		B10001 /* CycleFastingTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleFastingTimerApp.swift; sourceTree = "<group>"; };
 		B10002 /* FastingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingStore.swift; sourceTree = "<group>"; };
-		B10003 /* NeonColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeonColors.swift; sourceTree = "<group>"; };
+		B10003 /* CycleColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleColors.swift; sourceTree = "<group>"; };
 		B10004 /* CustomIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIcons.swift; sourceTree = "<group>"; };
 		B10005 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		B10006 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -35,13 +34,12 @@
 		B10008 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		B10009 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		B10010 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		B10011 /* NeonWebPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeonWebPanel.swift; sourceTree = "<group>"; };
-		B10012 /* NeonLoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeonLoadingScreen.swift; sourceTree = "<group>"; };
+		B10011 /* CycleWebPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleWebPanel.swift; sourceTree = "<group>"; };
+		B10012 /* CycleLoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleLoadingScreen.swift; sourceTree = "<group>"; };
 		B10015 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
-		B10016 /* PremiumModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumModalView.swift; sourceTree = "<group>"; };
 		B10013 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B10014 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B10099 /* Fasting Tracker Neon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fasting Tracker Neon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10099 /* Cycle Fasting Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cycle Fasting Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,17 +56,17 @@
 		D10001 = {
 			isa = PBXGroup;
 			children = (
-				D10002 /* Fasting Tracker Neon */,
+				D10002 /* Cycle Fasting Timer */,
 				D10003 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D10002 /* Fasting Tracker Neon */ = {
+		D10002 /* Cycle Fasting Timer */ = {
 			isa = PBXGroup;
 			children = (
-				B10001 /* FastingTrackerNeonApp.swift */,
+				B10001 /* CycleFastingTimerApp.swift */,
 				B10002 /* FastingStore.swift */,
-				B10003 /* NeonColors.swift */,
+				B10003 /* CycleColors.swift */,
 				B10004 /* CustomIcons.swift */,
 				B10005 /* OnboardingView.swift */,
 				B10006 /* MainTabView.swift */,
@@ -76,20 +74,19 @@
 				B10008 /* HistoryView.swift */,
 				B10009 /* StatsView.swift */,
 				B10010 /* SettingsView.swift */,
-				B10011 /* NeonWebPanel.swift */,
-				B10012 /* NeonLoadingScreen.swift */,
+				B10011 /* CycleWebPanel.swift */,
+				B10012 /* CycleLoadingScreen.swift */,
 				B10015 /* WeightView.swift */,
-				B10016 /* PremiumModalView.swift */,
 				B10013 /* Assets.xcassets */,
 				B10014 /* Info.plist */,
 			);
-			path = "Fasting Tracker Neon";
+			path = "Cycle Fasting Timer";
 			sourceTree = "<group>";
 		};
 		D10003 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B10099 /* Fasting Tracker Neon.app */,
+				B10099 /* Cycle Fasting Timer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,7 +94,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E10001 /* Fasting Tracker Neon */ = {
+		E10001 /* Cycle Fasting Timer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F10003;
 			buildPhases = (
@@ -109,9 +106,9 @@
 			);
 			dependencies = (
 			);
-			name = "Fasting Tracker Neon";
-			productName = "Fasting Tracker Neon";
-			productReference = B10099 /* Fasting Tracker Neon.app */;
+			name = "Cycle Fasting Timer";
+			productName = "Cycle Fasting Timer";
+			productReference = B10099 /* Cycle Fasting Timer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -137,7 +134,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E10001 /* Fasting Tracker Neon */,
+				E10001 /* Cycle Fasting Timer */,
 			);
 		};
 /* End PBXProject section */
@@ -158,9 +155,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A10001 /* FastingTrackerNeonApp.swift in Sources */,
+				A10001 /* CycleFastingTimerApp.swift in Sources */,
 				A10002 /* FastingStore.swift in Sources */,
-				A10003 /* NeonColors.swift in Sources */,
+				A10003 /* CycleColors.swift in Sources */,
 				A10004 /* CustomIcons.swift in Sources */,
 				A10005 /* OnboardingView.swift in Sources */,
 				A10006 /* MainTabView.swift in Sources */,
@@ -168,10 +165,9 @@
 				A10008 /* HistoryView.swift in Sources */,
 				A10009 /* StatsView.swift in Sources */,
 				A10010 /* SettingsView.swift in Sources */,
-				A10011 /* NeonWebPanel.swift in Sources */,
-				A10012 /* NeonLoadingScreen.swift in Sources */,
+				A10011 /* CycleWebPanel.swift in Sources */,
+				A10012 /* CycleLoadingScreen.swift in Sources */,
 				A10015 /* WeightView.swift in Sources */,
-				A10016 /* PremiumModalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,10 +230,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Fasting Tracker Neon/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Fasting Tracker Neon";
+				INFOPLIST_FILE = "Cycle Fasting Timer/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Cycle Fasting Timer";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -248,13 +243,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.neonfast.FastingTrackerNeon";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.serhatayyurdakul.cycle-fasting-timer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -266,10 +262,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Fasting Tracker Neon/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Fasting Tracker Neon";
+				INFOPLIST_FILE = "Cycle Fasting Timer/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Cycle Fasting Timer";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -280,13 +275,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.neonfast.FastingTrackerNeon";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.serhatayyurdakul.cycle-fasting-timer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -294,7 +290,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F10001 /* Build configuration list for PBXProject "Fasting Tracker Neon" */ = {
+		F10001 /* Build configuration list for PBXProject "Cycle Fasting Timer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				G10001 /* Debug */,
@@ -303,7 +299,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F10003 /* Build configuration list for PBXNativeTarget "Fasting Tracker Neon" */ = {
+		F10003 /* Build configuration list for PBXNativeTarget "Cycle Fasting Timer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				G10003 /* Debug */,

@@ -9,15 +9,15 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-            NeonColors.base.edgesIgnoringSafeArea(.all)
+            CycleColors.base.edgesIgnoringSafeArea(.all)
             
             ScrollView {
                 VStack(spacing: 24) {
                     Spacer().frame(height: 20)
                     
-                    Text("Fasting Tracker")
+                    Text("Cycle: Fasting Timer")
                         .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(NeonColors.textWhite)
+                        .foregroundColor(CycleColors.textWhite)
                     
                     // Plan selector
                     planSelector
@@ -29,7 +29,7 @@ struct TimerView: View {
                     // Status
                     Text(store.isFasting ? "Fasting" : "Eating Window")
                         .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(store.isFasting ? NeonColors.primary : NeonColors.dimText)
+                        .foregroundColor(store.isFasting ? CycleColors.primary : CycleColors.dimText)
                     
                     // Action button
                     actionButton
@@ -48,16 +48,16 @@ struct TimerView: View {
             HStack {
                 Text(store.selectedPlan.name)
                     .font(.system(size: 15, weight: .medium))
-                    .foregroundColor(NeonColors.textWhite)
+                    .foregroundColor(CycleColors.textWhite)
                 
                 ArrowRightShape()
-                    .stroke(NeonColors.dimText, lineWidth: 2)
+                    .stroke(CycleColors.dimText, lineWidth: 2)
                     .frame(width: 12, height: 12)
                     .rotationEffect(.degrees(showPlanPicker ? -90 : 90))
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
-            .background(NeonColors.card)
+            .background(CycleColors.card)
             .cornerRadius(10)
         }
         .sheet(isPresented: $showPlanPicker) {
@@ -70,13 +70,13 @@ struct TimerView: View {
         ZStack {
             // Background ring
             Circle()
-                .stroke(NeonColors.card, lineWidth: 12)
+                .stroke(CycleColors.card, lineWidth: 12)
             
             // Progress ring
             Circle()
                 .trim(from: 0, to: CGFloat(displayProgress))
                 .stroke(
-                    NeonColors.primary,
+                    CycleColors.primary,
                     style: StrokeStyle(lineWidth: 12, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
@@ -87,19 +87,19 @@ struct TimerView: View {
                 if store.isFasting {
                     Text(formatTime(displayTimeRemaining))
                         .font(.system(size: 40, weight: .bold, design: .monospaced))
-                        .foregroundColor(NeonColors.textWhite)
+                        .foregroundColor(CycleColors.textWhite)
                     
                     Text("remaining")
                         .font(.system(size: 13))
-                        .foregroundColor(NeonColors.dimText)
+                        .foregroundColor(CycleColors.dimText)
                 } else {
                     Text("00:00:00")
                         .font(.system(size: 40, weight: .bold, design: .monospaced))
-                        .foregroundColor(NeonColors.dimText)
+                        .foregroundColor(CycleColors.dimText)
                     
                     Text("tap to start")
                         .font(.system(size: 13))
-                        .foregroundColor(NeonColors.dimText)
+                        .foregroundColor(CycleColors.dimText)
                 }
             }
         }
@@ -115,9 +115,9 @@ struct TimerView: View {
         }) {
             Text(store.isFasting ? "End Fast" : "Start Fast")
                 .font(.system(size: 17, weight: .bold))
-                .foregroundColor(store.isFasting ? NeonColors.textWhite : NeonColors.base)
+                .foregroundColor(store.isFasting ? CycleColors.textWhite : CycleColors.base)
                 .frame(width: 200, height: 52)
-                .background(store.isFasting ? Color.red.opacity(0.8) : NeonColors.primary)
+                .background(store.isFasting ? Color.red.opacity(0.8) : CycleColors.primary)
                 .cornerRadius(26)
         }
     }
@@ -152,18 +152,18 @@ struct PlanPickerSheet: View {
     
     var body: some View {
         ZStack {
-            NeonColors.base.edgesIgnoringSafeArea(.all)
+            CycleColors.base.edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 16) {
                 HStack {
                     Text("Select Plan")
                         .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(NeonColors.textWhite)
+                        .foregroundColor(CycleColors.textWhite)
                     Spacer()
                     Button(action: { presentationMode.wrappedValue.dismiss() }) {
                         Text("Done")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(NeonColors.primary)
+                            .foregroundColor(CycleColors.primary)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -179,19 +179,19 @@ struct PlanPickerSheet: View {
                                 HStack {
                                     Text(plan.name)
                                         .font(.system(size: 16, weight: .medium))
-                                        .foregroundColor(NeonColors.textWhite)
+                                        .foregroundColor(CycleColors.textWhite)
                                     Spacer()
                                     Text("\(plan.fastingHours)h / \(plan.eatingHours)h")
                                         .font(.system(size: 14))
-                                        .foregroundColor(NeonColors.dimText)
+                                        .foregroundColor(CycleColors.dimText)
                                     if store.selectedPlan.id == plan.id {
                                         CheckmarkShape()
-                                            .stroke(NeonColors.primary, lineWidth: 2)
+                                            .stroke(CycleColors.primary, lineWidth: 2)
                                             .frame(width: 16, height: 16)
                                     }
                                 }
                                 .padding(14)
-                                .background(NeonColors.card)
+                                .background(CycleColors.card)
                                 .cornerRadius(10)
                             }
                         }
@@ -201,20 +201,20 @@ struct PlanPickerSheet: View {
                             HStack {
                                 Text("Custom")
                                     .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(NeonColors.textWhite)
+                                    .foregroundColor(CycleColors.textWhite)
                                 Spacer()
                                 TextField("", text: $customHours)
                                     .keyboardType(.numberPad)
                                     .font(.system(size: 15, weight: .bold))
-                                    .foregroundColor(NeonColors.primary)
+                                    .foregroundColor(CycleColors.primary)
                                     .frame(width: 40)
                                     .multilineTextAlignment(.center)
                                     .padding(4)
-                                    .background(NeonColors.cardLight)
+                                    .background(CycleColors.cardLight)
                                     .cornerRadius(6)
                                 Text("hours")
                                     .font(.system(size: 14))
-                                    .foregroundColor(NeonColors.dimText)
+                                    .foregroundColor(CycleColors.dimText)
                             }
                             
                             Button(action: {
@@ -226,15 +226,15 @@ struct PlanPickerSheet: View {
                             }) {
                                 Text("Set Custom")
                                     .font(.system(size: 14, weight: .semibold))
-                                    .foregroundColor(NeonColors.base)
+                                    .foregroundColor(CycleColors.base)
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 36)
-                                    .background(NeonColors.primary)
+                                    .background(CycleColors.primary)
                                     .cornerRadius(8)
                             }
                         }
                         .padding(14)
-                        .background(NeonColors.card)
+                        .background(CycleColors.card)
                         .cornerRadius(10)
                     }
                     .padding(.horizontal, 20)

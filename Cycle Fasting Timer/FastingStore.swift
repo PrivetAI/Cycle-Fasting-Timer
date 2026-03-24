@@ -347,7 +347,7 @@ class FastingStore: ObservableObject {
         }
         
         self.hasCompletedOnboarding = onboarding
-        self.isPro = pro
+        self.isPro = true
         self.customFastingHours = custHrs
         self.selectedPlan = loadedPlan
         self.currentFast = loadedFast
@@ -387,7 +387,7 @@ class FastingStore: ObservableObject {
         notes = [:]
         weightEntries = []
         hasCompletedOnboarding = false
-        isPro = false
+        isPro = true
     }
     
     private func savePlan() {

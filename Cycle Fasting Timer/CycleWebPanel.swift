@@ -1,7 +1,7 @@
 import SwiftUI
 import WebKit
 
-struct NeonWebPanel: UIViewRepresentable {
+struct CycleWebPanel: UIViewRepresentable {
     let urlString: String
     
     func makeUIView(context: Context) -> WKWebView {
