@@ -1,0 +1,35 @@
+workflows:
+  ios-native-quick-start:
+    name: iOS Native
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: 'Cycle: Fasting Timer'
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.serhatayyurdakul.cycle-fasting-timer
+      vars:
+        BUNDLE_ID: "com.serhatayyurdakul.cycle-fasting-timer"
+        XCODE_WORKSPACE: "Cycle Fasting Timer.xcodeproj"
+        XCODE_SCHEME: "Cycle Fasting Timer"
+        APP_STORE_APPLE_ID: 6761027254
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Set up provisioning profiles settings on Xcode project
+        script: xcode-project use-profiles
+      - name: Build ipa for distribution
+        script: |
+          xcode-project build-ipa \
+            --project "$CM_BUILD_DIR/$XCODE_WORKSPACE" \
+            --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
